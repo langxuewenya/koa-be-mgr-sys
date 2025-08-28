@@ -14,6 +14,12 @@ class UserService {
     const [values] = await connection.execute(statement, [username]);
     return values;
   }
+  // 查询某个用户信息
+  async searchUserInfoById(userId) {
+    const statement = "SELECT * FROM `user` WHERE id = ?;";
+    const [values] = await connection.execute(statement, [userId]);
+    return values;
+  }
 }
 
 module.exports = new UserService();
