@@ -1,4 +1,5 @@
 const userService = require("../service/user.service");
+const roleService = require("../service/role.service");
 
 class userController {
   // 新建用户
@@ -15,12 +16,21 @@ class userController {
   // 查询某个用户
   async searchUserById(ctx, next) {
     const { userId } = ctx.params;
-    const result = await userService.searchUserInfoById(userId);
-    const { id, username, real_name, cellphone } = result[0];
+    // 用户信息
+    const [user] = await userService.searchUserInfoById(userId);
+    const { id, username, real_name, cellphone, role_id } = user;
+    // 角色信息
+    const [role] = await roleService.searchRoleById(role_id);
+    const roleRes = {
+      id: role.id,
+      name: role.name,
+      key: role.role_key,
+      remark: role.remark,
+    };
     ctx.body = {
       code: 200,
-      message: "查询成功",
-      data: { id, username, realName: real_name, cellphone },
+      message: "success",
+      data: { id, username, realName: real_name, cellphone, role: roleRes },
     };
   }
 }
