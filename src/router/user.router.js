@@ -21,5 +21,12 @@ userRouter.get(
   userController.searchUserById
 );
 
-// 3. 导出路由
+// 查询用户列表
+userRouter.post(
+  "/list",
+  loginMiddleware.verifyAuth,
+  userController.searchUserList
+);
+
+// 导出路由
 module.exports = userRouter;

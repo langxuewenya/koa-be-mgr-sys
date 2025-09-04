@@ -33,6 +33,21 @@ class userController {
       data: { id, username, realName: real_name, cellphone, role: roleRes },
     };
   }
+
+  // 查询用户列表
+  async searchUserList(ctx, next) {
+    const { totalCount, users } = await userService.searchUserList(
+      ctx.request.body
+    );
+    ctx.body = {
+      code: 200,
+      message: "success",
+      data: {
+        list: users,
+        totalCount,
+      },
+    };
+  }
 }
 
 module.exports = new userController();
