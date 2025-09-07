@@ -8,8 +8,7 @@ class userController {
     const result = await userService.addUser(user);
     ctx.body = {
       code: 200,
-      message: "创建用户成功",
-      data: result,
+      message: "success",
     };
   }
 

@@ -3,9 +3,16 @@ const connection = require("../app/database");
 class UserService {
   // 新增用户
   async addUser(user) {
-    const { username, password } = user;
-    const statement = "INSERT INTO `user` (username, password) VALUES (?, ?);";
-    const [result] = await connection.execute(statement, [username, password]);
+    const { username, password, real_name, cellphone, role_id } = user;
+    const statement =
+      "INSERT INTO `user` (username, password, real_name, cellphone, role_id) VALUES (?, ?, ?, ?, ?);";
+    const [result] = await connection.execute(statement, [
+      username,
+      password,
+      real_name,
+      cellphone,
+      role_id,
+    ]);
     return result;
   }
   // 查询用户是否存在
@@ -22,7 +29,7 @@ class UserService {
   }
   // 查询用户列表
   async searchUserList(body) {
-    const { username, cellphone, role, currentPage, pageSize } = body;
+    const { username, cellphone, role_id, currentPage, pageSize } = body;
     const createTimeSatrt = body.createTime?.[0];
     const createTimeEnd = body.createTime?.[1];
     const offset = (currentPage - 1) * pageSize;
@@ -37,9 +44,9 @@ class UserService {
       baseSql += " AND cellphone LIKE CONCAT('%', ?, '%')";
       params.push(cellphone);
     }
-    if (role) {
+    if (role_id) {
       baseSql += " AND role_id = ?";
-      params.push(role);
+      params.push(role_id);
     }
     if (createTimeSatrt) {
       baseSql += " AND create_time >= ?";
