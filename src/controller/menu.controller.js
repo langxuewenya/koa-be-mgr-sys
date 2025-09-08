@@ -15,6 +15,15 @@ class menuController {
       },
     };
   }
+  // 新增菜单
+  async addMenu(ctx, next) {
+    const menu = ctx.request.body;
+    const result = await menuService.addMenu(menu);
+    ctx.body = {
+      code: 200,
+      message: "success",
+    };
+  }
 }
 
 module.exports = new menuController();

@@ -43,6 +43,32 @@ class MenuService {
     );
     return { totalCount, menus };
   }
+  // 新增菜单
+  async addMenu(menu) {
+    const { name, type, path, parent_id, icon } = menu;
+    const statement =
+      "INSERT INTO `menus` (name, type, path, parent_id, icon) VALUES (?, ?, ?, ?, ?);";
+    const [result] = await connection.execute(statement, [
+      name,
+      type,
+      path,
+      parent_id || null,
+      icon,
+    ]);
+    return result;
+  }
+  // 查询菜单名称是否存在
+  async findMenuByName(name) {
+    const statement = "SELECT * FROM `menus` WHERE name = ?;";
+    const [result] = await connection.execute(statement, [name]);
+    return result;
+  }
+  // 查询菜单路径是否存在
+  async findMenuByPath(path) {
+    const statement = "SELECT * FROM `menus` WHERE path = ?;";
+    const [result] = await connection.execute(statement, [path]);
+    return result;
+  }
 }
 
 module.exports = new MenuService();

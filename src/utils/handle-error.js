@@ -5,6 +5,8 @@ const {
   NAME_IS_NOT_EXISTS,
   PASSWORD_IS_INCORRENT,
   UNAUTHORIZATION,
+  MENU_NAME_IS_EXISTS,
+  MENU_PATH_IS_EXISTS,
 } = require("../config/error");
 
 app.on("error", (error, ctx) => {
@@ -25,6 +27,12 @@ app.on("error", (error, ctx) => {
       break;
     case UNAUTHORIZATION:
       message = "无效的token或token已过期";
+      break;
+    case MENU_NAME_IS_EXISTS:
+      message = "菜单名称已经存在，请输入新的菜单名称";
+      break;
+    case MENU_PATH_IS_EXISTS:
+      message = "菜单路径已经存在，请输入新的菜单路径";
       break;
   }
   ctx.body = { code, message };
