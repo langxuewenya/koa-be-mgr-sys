@@ -15,6 +15,26 @@ class UserService {
     ]);
     return result;
   }
+  // 修改用户
+  async updateUser(user) {
+    const { username, real_name, cellphone, role_id, id } = user;
+    const statement =
+      "UPDATE `user` SET username = ?, real_name = ?, cellphone = ?, role_id = ? WHERE id = ?;";
+    const [result] = await connection.execute(statement, [
+      username,
+      real_name,
+      cellphone,
+      role_id,
+      id,
+    ]);
+    return result;
+  }
+  // 删除用户
+  async deleteUser(userId) {
+    const statement = "DELETE FROM `user` WHERE id = ?;";
+    const [result] = await connection.execute(statement, [userId]);
+    return result;
+  }
   // 查询用户是否存在
   async findUserByUsername(username) {
     const statement = "SELECT * FROM `user` WHERE username = ?;";

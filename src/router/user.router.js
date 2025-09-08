@@ -14,6 +14,16 @@ userRouter.post(
   userController.addUser
 );
 
+// 修改用户
+userRouter.patch("/", loginMiddleware.verifyAuth, userController.updateUser);
+
+// 删除用户
+userRouter.delete(
+  "/:userId",
+  loginMiddleware.verifyAuth,
+  userController.deleteUser
+);
+
 // 查询某个用户
 userRouter.get(
   "/:userId",

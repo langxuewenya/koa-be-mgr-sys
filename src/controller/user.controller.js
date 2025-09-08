@@ -12,6 +12,26 @@ class userController {
     };
   }
 
+  // 修改用户
+  async updateUser(ctx, next) {
+    const user = ctx.request.body;
+    const result = await userService.updateUser(user);
+    ctx.body = {
+      code: 200,
+      message: "success",
+    };
+  }
+
+  // 删除用户
+  async deleteUser(ctx, next) {
+    const { userId } = ctx.params;
+    const result = await userService.deleteUser(userId);
+    ctx.body = {
+      code: 200,
+      message: "success",
+    };
+  }
+
   // 查询某个用户
   async searchUserById(ctx, next) {
     const { userId } = ctx.params;
