@@ -20,4 +20,19 @@ menuRouter.post(
   menuController.addMenu
 );
 
+// 修改菜单
+menuRouter.patch(
+  "/",
+  loginMiddleware.verifyAuth,
+  menuMiddleware.verifyMenu,
+  menuController.updateMenu
+);
+
+// 删除菜单
+menuRouter.delete(
+  "/:menuId",
+  loginMiddleware.verifyAuth,
+  menuController.deleteMenu
+);
+
 module.exports = menuRouter;

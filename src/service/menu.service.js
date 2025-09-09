@@ -57,16 +57,37 @@ class MenuService {
     ]);
     return result;
   }
+  // 修改菜单
+  async updateMenu(menu) {
+    const { name, type, path, parent_id, icon, id } = menu;
+    const statement =
+      "UPDATE `menus` SET name = ?, type = ?, path = ?, parent_id = ?, icon = ? WHERE id = ?;";
+    const [result] = await connection.execute(statement, [
+      name,
+      type,
+      path,
+      parent_id || null,
+      icon,
+      id,
+    ]);
+    return result;
+  }
+  // 删除菜单
+  async deleteMenu(menuId) {
+    const statement = "DELETE FROM `menus` WHERE id = ?;";
+    const [result] = await connection.execute(statement, [menuId]);
+    return result;
+  }
   // 查询菜单名称是否存在
-  async findMenuByName(name) {
-    const statement = "SELECT * FROM `menus` WHERE name = ?;";
-    const [result] = await connection.execute(statement, [name]);
+  async findMenuByName(name, id) {
+    const statement = "SELECT * FROM `menus` WHERE name = ? AND id <> ?;";
+    const [result] = await connection.execute(statement, [name, id]);
     return result;
   }
   // 查询菜单路径是否存在
-  async findMenuByPath(path) {
-    const statement = "SELECT * FROM `menus` WHERE path = ?;";
-    const [result] = await connection.execute(statement, [path]);
+  async findMenuByPath(path, id) {
+    const statement = "SELECT * FROM `menus` WHERE path = ? AND id <> ?;";
+    const [result] = await connection.execute(statement, [path, id]);
     return result;
   }
 }

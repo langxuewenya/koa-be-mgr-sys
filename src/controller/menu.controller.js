@@ -24,6 +24,24 @@ class menuController {
       message: "success",
     };
   }
+  // 修改菜单
+  async updateMenu(ctx, next) {
+    const menu = ctx.request.body;
+    const result = await menuService.updateMenu(menu);
+    ctx.body = {
+      code: 200,
+      message: "success",
+    };
+  }
+  // 删除菜单
+  async deleteMenu(ctx, next) {
+    const { menuId } = ctx.params;
+    const result = await menuService.deleteMenu(menuId);
+    ctx.body = {
+      code: 200,
+      message: "success",
+    };
+  }
 }
 
 module.exports = new menuController();

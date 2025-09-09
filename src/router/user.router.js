@@ -15,7 +15,12 @@ userRouter.post(
 );
 
 // 修改用户
-userRouter.patch("/", loginMiddleware.verifyAuth, userController.updateUser);
+userRouter.patch(
+  "/",
+  loginMiddleware.verifyAuth,
+  userMiddleware.verifyUser,
+  userController.updateUser
+);
 
 // 删除用户
 userRouter.delete(
