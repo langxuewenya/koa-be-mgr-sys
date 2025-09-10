@@ -42,6 +42,15 @@ class menuController {
       message: "success",
     };
   }
+  // 查询父级菜单
+  async searchParentMenu(ctx, next) {
+    const menus = await menuService.searchParentMenu();
+    ctx.body = {
+      code: 200,
+      message: "success",
+      data: menus,
+    };
+  }
 }
 
 module.exports = new menuController();

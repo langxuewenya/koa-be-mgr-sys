@@ -35,4 +35,11 @@ menuRouter.delete(
   menuController.deleteMenu
 );
 
+// 查询父级菜单
+menuRouter.get(
+  "/parent",
+  loginMiddleware.verifyAuth,
+  menuController.searchParentMenu
+);
+
 module.exports = menuRouter;

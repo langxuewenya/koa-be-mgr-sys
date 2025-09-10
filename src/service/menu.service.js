@@ -90,6 +90,12 @@ class MenuService {
     const [result] = await connection.execute(statement, [path, id]);
     return result;
   }
+  // 查询父级菜单
+  async searchParentMenu() {
+    const statement = "SELECT * FROM `menus` WHERE type = ?;";
+    const [result] = await connection.execute(statement, ["1"]);
+    return result;
+  }
 }
 
 module.exports = new MenuService();
