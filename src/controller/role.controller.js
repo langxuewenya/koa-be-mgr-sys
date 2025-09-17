@@ -20,6 +20,18 @@ class roleController {
       data: menusTree,
     };
   }
+  // 查询角色列表
+  async searcMenuList(ctx, next) {
+    const { totalCount, roles } = await roleService.searchRoleList();
+    ctx.body = {
+      code: 200,
+      message: "success",
+      data: {
+        list: roles,
+        totalCount,
+      },
+    };
+  }
 }
 
 module.exports = new roleController();

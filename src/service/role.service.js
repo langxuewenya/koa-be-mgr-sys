@@ -19,6 +19,19 @@ class RoleService {
     const [menus] = await connection.execute(statement, [roleId]);
     return menus;
   }
+
+  // 查询角色列表
+  async searchRoleList() {
+    // 查询总条数
+    const [total] = await connection.execute(
+      `SELECT COUNT(*) AS total FROM role;`
+    );
+    const totalCount = total[0].total;
+    // 查询列表数据
+    const statement = "SELECT * FROM `role`;";
+    const [roles] = await connection.execute(statement);
+    return { totalCount, roles };
+  }
 }
 
 module.exports = new RoleService();

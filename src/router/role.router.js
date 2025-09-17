@@ -11,4 +11,11 @@ roledRouter.get(
   roleController.searcMenusTreeByRoleId
 );
 
+// 查询角色列表
+roledRouter.post(
+  "/list",
+  loginMiddleware.verifyAuth,
+  roleController.searcMenuList
+);
+
 module.exports = roledRouter;
