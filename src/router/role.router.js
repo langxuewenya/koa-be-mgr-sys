@@ -35,4 +35,11 @@ roledRouter.patch(
   roleController.updateRole
 );
 
+// 删除角色
+roledRouter.delete(
+  "/:roleId",
+  loginMiddleware.verifyAuth,
+  roleController.deleteRole
+);
+
 module.exports = roledRouter;

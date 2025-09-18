@@ -17,6 +17,13 @@ class RoleService {
     return result;
   }
 
+  // 删除角色
+  async deleteRole(roleId) {
+    const statement = "DELETE FROM `role` WHERE id = ?;";
+    const [result] = await connection.execute(statement, [roleId]);
+    return result;
+  }
+
   // 查询某个角色信息
   async searchRoleById(roleId) {
     const statement = "SELECT * FROM `role` WHERE id = ?;";

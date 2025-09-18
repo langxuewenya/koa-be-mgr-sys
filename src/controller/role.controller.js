@@ -50,6 +50,15 @@ class roleController {
       message: "success",
     };
   }
+  // 删除角色
+  async deleteRole(ctx, next) {
+    const { roleId } = ctx.params;
+    const result = await roleService.deleteRole(roleId);
+    ctx.body = {
+      code: 200,
+      message: "success",
+    };
+  }
 }
 
 module.exports = new roleController();
