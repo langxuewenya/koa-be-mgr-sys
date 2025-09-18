@@ -1,5 +1,6 @@
 const KoaRouter = require("@koa/router");
 const loginMiddleware = require("../middleware/login.middleware");
+const roleMiddleware = require("../middleware/role.middleware");
 const roleController = require("../controller/role.controller");
 
 const roledRouter = new KoaRouter({ prefix: "/role" });
@@ -15,7 +16,15 @@ roledRouter.get(
 roledRouter.post(
   "/list",
   loginMiddleware.verifyAuth,
-  roleController.searcMenuList
+  roleController.searcRoleList
+);
+
+// 新增角色
+roledRouter.post(
+  "/",
+  loginMiddleware.verifyAuth,
+  roleMiddleware.verifyRole,
+  roleController.addRole
 );
 
 module.exports = roledRouter;

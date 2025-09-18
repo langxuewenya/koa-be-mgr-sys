@@ -2,6 +2,12 @@ const connection = require("../app/database");
 
 class RoleService {
   // 新增角色
+  async addRole(role) {
+    const { name, remark } = role;
+    const statement = "INSERT INTO `role` (name, remark) VALUES (?, ?);";
+    const [result] = await connection.execute(statement, [name, remark]);
+    return result;
+  }
 
   // 查询某个角色信息
   async searchRoleById(roleId) {
@@ -31,6 +37,13 @@ class RoleService {
     const statement = "SELECT * FROM `role`;";
     const [roles] = await connection.execute(statement);
     return { totalCount, roles };
+  }
+
+  // 查询角色名称是否存在
+  async findRoleByName(name, id) {
+    const statement = "SELECT * FROM `role` WHERE name = ? AND id <> ?;";
+    const [result] = await connection.execute(statement, [name, id]);
+    return result;
   }
 }
 

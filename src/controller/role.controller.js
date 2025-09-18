@@ -21,7 +21,7 @@ class roleController {
     };
   }
   // 查询角色列表
-  async searcMenuList(ctx, next) {
+  async searcRoleList(ctx, next) {
     const { totalCount, roles } = await roleService.searchRoleList();
     ctx.body = {
       code: 200,
@@ -30,6 +30,15 @@ class roleController {
         list: roles,
         totalCount,
       },
+    };
+  }
+  // 新增角色
+  async addRole(ctx, next) {
+    const role = ctx.request.body;
+    const result = await roleService.addRole(role);
+    ctx.body = {
+      code: 200,
+      message: "success",
     };
   }
 }

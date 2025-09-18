@@ -7,6 +7,7 @@ const {
   UNAUTHORIZATION,
   MENU_NAME_IS_EXISTS,
   MENU_PATH_IS_EXISTS,
+  ROLE_NAME_IS_EXISTS,
 } = require("../config/error");
 
 app.on("error", (error, ctx) => {
@@ -33,6 +34,9 @@ app.on("error", (error, ctx) => {
       break;
     case MENU_PATH_IS_EXISTS:
       message = "菜单路径已经存在，请输入新的菜单路径";
+      break;
+    case ROLE_NAME_IS_EXISTS:
+      message = "角色名称已经存在，请输入新的角色名称";
       break;
   }
   ctx.body = { code, message };

@@ -5,6 +5,7 @@ const PASSWORD_IS_INCORRENT = "password_is_incorrent";
 const UNAUTHORIZATION = "unauthorization";
 const MENU_NAME_IS_EXISTS = "menu_name_is_exists";
 const MENU_PATH_IS_EXISTS = "menu_path_is_exists";
+const ROLE_NAME_IS_EXISTS = "role_name_is_exists";
 
 module.exports = {
   NAME_OR_PASSWORD_IS_REQUIRED,
@@ -14,4 +15,5 @@ module.exports = {
   UNAUTHORIZATION,
   MENU_NAME_IS_EXISTS,
   MENU_PATH_IS_EXISTS,
+  ROLE_NAME_IS_EXISTS,
 };
