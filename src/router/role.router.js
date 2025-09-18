@@ -27,4 +27,12 @@ roledRouter.post(
   roleController.addRole
 );
 
+// 修改角色
+roledRouter.patch(
+  "/",
+  loginMiddleware.verifyAuth,
+  roleMiddleware.verifyRole,
+  roleController.updateRole
+);
+
 module.exports = roledRouter;

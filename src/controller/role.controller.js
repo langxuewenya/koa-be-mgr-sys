@@ -41,6 +41,15 @@ class roleController {
       message: "success",
     };
   }
+  // 修改角色
+  async updateRole(ctx, next) {
+    const role = ctx.request.body;
+    const result = await roleService.updateRole(role);
+    ctx.body = {
+      code: 200,
+      message: "success",
+    };
+  }
 }
 
 module.exports = new roleController();
